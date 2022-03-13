@@ -39,9 +39,7 @@ jobs:
             --header "Content-Type: application/json"
             --header "Accept: application/json"
             --header "Circle-Token: $CIRCLE_TOKEN"
-            "https://circleci.com/api/v1.1/project/<< pipeline.project.type >>/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/latest/artifacts?branch=$CIRCLE_BRANCH&filter=completed" |
-            grep --only-matching 'https://[^"]*build-job-metadata[^"]*' |
-            xargs -I url wget --header "Circle-Token: $CIRCLE_TOKEN" url
+          
       - run:
           name: Overwrite CIRCLE_JOB environment variable with build.
           command: echo export CIRCLE_JOB=build >> $BASH_ENV
